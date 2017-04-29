@@ -46,6 +46,7 @@ def airflow():
 
     N = dim[0] # Number of values to compute
     X = np.linspace(0, 1, N)
+    hmax = max(ey)
     print(X)
 
 airflow()
