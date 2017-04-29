@@ -28,9 +28,10 @@ def airflow():
 
 
     #================PLOT================#
-    """
+    print("#================PLOT================#\n")
+    
     plt.plot(ex, ey)
     plt.plot(ix, iy)
     plt.show()
-    """
+
 airflow()
