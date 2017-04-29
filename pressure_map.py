@@ -28,10 +28,24 @@ def airflow():
 
 
     #================PLOT================#
-    print("#================PLOT================#\n")
-    
-    plt.plot(ex, ey)
-    plt.plot(ix, iy)
+    print("#================PLOTS================#\n")
+
+    print("~Only the aircraft wing~\n")
+
+    plt.plot(ex, ey, label="extrados")
+    plt.plot(ix, iy, label="intrados")
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.grid(True)
+    plt.title("~Only the aircraft wing~")
+    plt.legend()
+    plt.ylim((-0.25,0.25))
     plt.show()
+
+    print("~The aircraft wing with the airflow~\n")
+
+    N = dim[0] # Number of values to compute
+    X = np.linspace(0, 1, N)
+    print(X)
 
 airflow()
