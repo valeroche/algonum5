@@ -26,7 +26,7 @@ def load_foil(file):
                 rintra = True
             continue;
         if (m != None) and rheader and not(rextra) and not(rintra):
-            dim = np.array(map(lambda t: float(t), m.groups()))
+            dim = np.array(list(map(lambda t: float(t), m.groups())))
             continue
         if (m != None) and rheader and rextra and not(rintra):
             extra.append(m.groups())
@@ -34,13 +34,13 @@ def load_foil(file):
         if (m != None) and rheader and rextra and rintra:
             intra.append(m.groups())
             continue;
-    ex = np.array(map(lambda t: float(t[0]),extra))
-    ey = np.array(map(lambda t: float(t[1]),extra))
-    ix = np.array(map(lambda t: float(t[0]),intra))
-    iy = np.array(map(lambda t: float(t[1]),intra))
+    ex = np.array(list(map(lambda t: float(t[0]),extra)))
+    ey = np.array(list(map(lambda t: float(t[1]),extra)))
+    ix = np.array(list(map(lambda t: float(t[0]),intra)))
+    iy = np.array(list(map(lambda t: float(t[1]),intra)))
     return(dim,ex,ey,ix,iy)
 
-def test_load_file():
+def test_load_foil():
     (dim,ex,ey,ix,iy) = load_foil("boe103.dat")
 
     print(dim)
