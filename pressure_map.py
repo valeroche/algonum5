@@ -44,9 +44,37 @@ def airflow():
 
     print("~The aircraft wing with the airflow~\n")
 
-    N = dim[0] # Number of values to compute
-    X = np.linspace(0, 1, N)
+    Ne = len(ex)
+    Ni = len(ix)
     hmax = max(ey)
-    print(X)
+    hmin = min(iy)
+    print("hmax =", hmax)
+    print("hmin =", hmin)
+
+    M = int(input("How many upper airflow curves do you wish to plot ?\t"))
+    tab = np.linspace(0, 1, M)
+
+        # Upper Curves
+    for l in tab:
+        Y = [((1 - l)*ey[i] + l*3*hmax) for i in range(Ne)]
+        plt.plot(ex, Y, c="black")
+
+    Q = int(input("How many lower airflow curves do you wish to plot ?\t"))
+    tab_2 = np.linspace(0, 1, Q)
+
+        # Lower curves
+    for l in tab_2:
+        Y = [((1 - l)*iy[i] + l*3*hmin) for i in range(Ni)]
+        plt.plot(ix, Y, c="black")
+
+    plt.plot(ex, ey, label="extrados")
+    plt.plot(ix, iy, label="intrados")
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.grid(True)
+    plt.title("~The aircraft wing with the airflow~")
+    plt.legend()
+    plt.ylim((-0.1,0.35))
+    plt.show()
 
 airflow()
