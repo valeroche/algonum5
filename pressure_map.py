@@ -121,7 +121,8 @@ def pressure_map():
     print("hmin =", hmin)
     print("")
 
-    M = int(input("How many upper airflow curves do you wish to plot ?\t"))
+    #M = int(input("How many upper airflow curves do you wish to plot ?\t"))
+    M = 150
     tab = np.linspace(0, 1, M)
 
         # Upper Curves
@@ -134,7 +135,8 @@ def pressure_map():
         plt.plot(ex, Ye, c=str((curve_l-1)*22))
         Y1 = Ye
 
-    Q = int(input("How many lower airflow curves do you wish to plot ?\t"))
+    #Q = int(input("How many lower airflow curves do you wish to plot ?\t"))
+    Q = 110
     tab_2 = np.linspace(0, 1, Q)
   
         # Lower curves
@@ -153,7 +155,7 @@ def pressure_map():
     for i in range(int((len(iy) - 1)/2)):
         Iy[i] = iy[i]
     for i in range(int((len(iy) - 1)/2), len(iy) - 1):
-        Iy[i] = iy[i] - 0.0038
+        Iy[i] = iy[i] - 0.004
     Iy[len(iy) - 1] = Iy[len(iy) - 2]/2
     Iy[len(iy)] = 0
     plt.fill_between(ex, ey, Iy, color='black')
@@ -165,5 +167,5 @@ def pressure_map():
     plt.ylim((-0.1,0.32))
     plt.show()
 
-#airflow()
+airflow()
 pressure_map()
