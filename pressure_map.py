@@ -50,6 +50,7 @@ def airflow():
     hmin = min(iy)
     print("hmax =", hmax)
     print("hmin =", hmin)
+    print("")
 
     M = int(input("How many upper airflow curves do you wish to plot ?\t"))
     tab = np.linspace(0, 1, M)
@@ -76,5 +77,8 @@ def airflow():
     plt.legend()
     plt.ylim((-0.1,0.35))
     plt.show()
+
+def pressure_map():
+    return
 
 airflow()
