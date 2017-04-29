@@ -75,7 +75,7 @@ def airflow():
     plt.grid(True)
     plt.title("~The aircraft wing with the airflow~")
     plt.legend()
-    plt.ylim((-0.1,0.35))
+    plt.ylim((-0.1,0.32))
     plt.show()
 
 def pressure_map():
