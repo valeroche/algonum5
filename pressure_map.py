@@ -121,6 +121,8 @@ def pressure_map():
     print("hmin =", hmin)
     print("")
 
+    print("Black & white\n")
+
     #M = int(input("How many upper airflow curves do you wish to plot ?\t"))
     M = 150
     tab = np.linspace(0, 1, M)
@@ -138,7 +140,7 @@ def pressure_map():
     #Q = int(input("How many lower airflow curves do you wish to plot ?\t"))
     Q = 110
     tab_2 = np.linspace(0, 1, Q)
-  
+
         # Lower curves
     Y2 = [((1 - tab_2[0])*iy[i] + tab_2[0]*3*hmin) for i in range(Ni)]
     for j in range(Q):
@@ -147,6 +149,58 @@ def pressure_map():
         #print(curve_l)
         plt.fill_between(ix, Y2, Yi, color=str((curve_l-1)*22))
         plt.plot(ix, Yi, c=str((curve_l-1)*22))
+        Y2 = Yi
+
+    plt.plot(ex, ey, c="black", label="extrados")
+    plt.plot(ix, iy, c="black", label="intrados")
+    Iy = np.zeros(len(ey))
+    for i in range(int((len(iy) - 1)/2)):
+        Iy[i] = iy[i]
+    for i in range(int((len(iy) - 1)/2), len(iy) - 1):
+        Iy[i] = iy[i] - 0.004
+    Iy[len(iy) - 1] = Iy[len(iy) - 2]/2
+    Iy[len(iy)] = 0
+    plt.fill_between(ex, ey, Iy, color='black')
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.grid(True)
+    plt.title("~Pressure map~")
+    plt.legend()
+    plt.ylim((-0.1,0.32))
+    plt.show()
+
+    print("Dark & Red\n")
+
+    #M = int(input("How many upper airflow curves do you wish to plot ?\t"))
+    M = 200
+    tab = np.linspace(0, 1, M)
+
+        # Upper Curves
+    Y1 = [((1 - tab[0])*ey[i] + tab[0]*3*hmax) for i in range(Ne)]
+    for j in range(M):
+        Ye = [((1 - tab[j])*ey[i] + tab[j]*3*hmax) for i in range(Ne)]
+        curve_l = curve_length(ex, Ye)
+        #print(curve_l)
+        n = int((curve_l - 1)*242)
+        colour = '#' + str(n) + str(n) + '0000'
+        plt.fill_between(ex, Y1, Ye, color=colour)
+        plt.plot(ex, Ye, c=colour)
+        Y1 = Ye
+
+    #Q = int(input("How many lower airflow curves do you wish to plot ?\t"))
+    Q = 150
+    tab_2 = np.linspace(0, 1, Q)
+
+        # Lower curves
+    Y2 = [((1 - tab_2[0])*iy[i] + tab_2[0]*3*hmin) for i in range(Ni)]
+    for j in range(Q):
+        Yi = [((1 - tab_2[j])*iy[i] + tab_2[j]*3*hmin) for i in range(Ni)]
+        curve_l = curve_length(ix, Yi)
+        #print(curve_l)
+        n = int((curve_l - 1)*242)
+        colour = '#' + str(n) + str(n) + '0000'
+        plt.fill_between(ix, Y2, Yi, color=colour)
+        plt.plot(ix, Yi, c=colour)
         Y2 = Yi
 
     plt.plot(ex, ey, c="black", label="extrados")
