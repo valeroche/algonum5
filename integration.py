@@ -3,10 +3,10 @@ import pylab as pl
 
 
 
-def length(f, method, a, b, step):
+def length(f, method, T, step):
     df = lambda x : (f(x + step) - f(x))/step
     g = lambda x : np.sqrt(1 + df(x)**2)
-    return integration(g, method,a, b, step)
+    return integration(g, method, T, step)
 
 def integration(f, method, a, b, step):
     g = lambda t,xi,xi1 : f((1-t)*xi/2 + (1+t)*xi1/2)
