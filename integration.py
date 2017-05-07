@@ -5,7 +5,7 @@ from scipy.special import legendre
 def length(f, method, T, step):
     df = lambda x : (f(x + step) - f(x))/step
     g = lambda x : np.sqrt(1 + df(x)**2)
-    return integration(g, method, T, step)
+    return integration(g, method, 0, T, step)
 
 def gauss(f, r):
     Pr = legendre(r)

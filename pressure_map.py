@@ -4,6 +4,7 @@ import load_data_file as ldf
 import numpy as np
 import matplotlib.pyplot as plt
 import math as m
+import integration as it
 
 #==================================CORE========================================#
 
@@ -79,6 +80,23 @@ def airflow():
     plt.ylim((-0.1,0.32))
     plt.show()
 
+def f_lam(f, lam, h):
+    return lambda x : (1 - lam)*f(x) + lam*3*h
+
+def f_upper(x):
+    (dim,ex,ey,ix,iy) = ldf.load_foil("boe103.dat")
+    for i in range(1, dim[0]):
+        if (x < ex[i]):
+            return (ey[i-1] + ey[i])/2
+    return ey(dim[0] - 1)
+
+def f_lower(x):
+    (dim,ex,ey,ix,iy) = ldf.load_foil("boe103.dat")
+    for i in range(1, dim[1]):
+        if (x < ix[i]):
+            return (iy[i-1] + iy[i])/2
+    return iy(dim[1] - 1)
+
 def curve_length(X, Y):
     if (len(X) != len(Y)):
         print("Lengths are not compatible !")
@@ -131,8 +149,8 @@ def pressure_map():
     Y1 = [((1 - tab[0])*ey[i] + tab[0]*3*hmax) for i in range(Ne)]
     for j in range(M):
         Ye = [((1 - tab[j])*ey[i] + tab[j]*3*hmax) for i in range(Ne)]
-        curve_l = curve_length(ex, Ye)
-        #print(curve_l)
+        #curve_l = curve_length(ex, Ye)
+        curve_l = it.length(f_lam(f_upper, tab[j], hmax), "gauss", 1, 0.02)
         plt.fill_between(ex, Y1, Ye, color=str((curve_l-1)*22))
         plt.plot(ex, Ye, c=str((curve_l-1)*22))
         Y1 = Ye
