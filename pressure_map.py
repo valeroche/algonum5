@@ -149,9 +149,9 @@ def pressure_map():
     Y1 = [((1 - tab[0])*ey[i] + tab[0]*3*hmax) for i in range(Ne)]
     for j in range(M):
         Ye = [((1 - tab[j])*ey[i] + tab[j]*3*hmax) for i in range(Ne)]
-        #curve_l = curve_length(ex, Ye)
-        curve_l = it.length(f_lam(f_upper, tab[j], hmax), "trapezium", 1, 0.02)
-        print(curve_l)
+        curve_l = curve_length(ex, Ye)
+        #curve_l = it.length(f_lam(f_upper, tab[j], hmax), "trapezium", 1, 0.02)
+        #print(curve_l)
         plt.fill_between(ex, Y1, Ye, color='black')
         plt.plot(ex, Ye, c=str((curve_l-1)*22))
         Y1 = Ye
@@ -164,9 +164,9 @@ def pressure_map():
     Y2 = [((1 - tab_2[0])*iy[i] + tab_2[0]*3*hmin) for i in range(Ni)]
     for j in range(Q):
         Yi = [((1 - tab_2[j])*iy[i] + tab_2[j]*3*hmin) for i in range(Ni)]
-        #curve_l = curve_length(ix, Yi)
-        curve_l = it.length(f_lam(f_lower, tab_2[j], hmin), "trapezium", 1, 0.02)
-        print(curve_l)
+        curve_l = curve_length(ix, Yi)
+        #curve_l = it.length(f_lam(f_lower, tab_2[j], hmin), "trapezium", 1, 0.02)
+        #print(curve_l)
         plt.fill_between(ix, Y2, Yi, color='black')
         plt.plot(ix, Yi, c=str((curve_l-1)*22))
         Y2 = Yi
