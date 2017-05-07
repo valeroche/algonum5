@@ -85,17 +85,17 @@ def f_lam(f, lam, h):
 
 def f_upper(x):
     (dim,ex,ey,ix,iy) = ldf.load_foil("boe103.dat")
-    for i in range(1, dim[0]):
+    for i in range(1, int(dim[0])):
         if (x < ex[i]):
             return (ey[i-1] + ey[i])/2
-    return ey(dim[0] - 1)
+    return ey[int(dim[0]) - 1]
 
 def f_lower(x):
     (dim,ex,ey,ix,iy) = ldf.load_foil("boe103.dat")
-    for i in range(1, dim[1]):
+    for i in range(1, int(dim[1])):
         if (x < ix[i]):
             return (iy[i-1] + iy[i])/2
-    return iy(dim[1] - 1)
+    return iy[int(dim[1]) - 1]
 
 def curve_length(X, Y):
     if (len(X) != len(Y)):
@@ -150,8 +150,9 @@ def pressure_map():
     for j in range(M):
         Ye = [((1 - tab[j])*ey[i] + tab[j]*3*hmax) for i in range(Ne)]
         #curve_l = curve_length(ex, Ye)
-        curve_l = it.length(f_lam(f_upper, tab[j], hmax), "gauss", 1, 0.02)
-        plt.fill_between(ex, Y1, Ye, color=str((curve_l-1)*22))
+        curve_l = it.length(f_lam(f_upper, tab[j], hmax), "trapezium", 1, 0.02)
+        print(curve_l)
+        plt.fill_between(ex, Y1, Ye, color='black')
         plt.plot(ex, Ye, c=str((curve_l-1)*22))
         Y1 = Ye
 
@@ -163,9 +164,10 @@ def pressure_map():
     Y2 = [((1 - tab_2[0])*iy[i] + tab_2[0]*3*hmin) for i in range(Ni)]
     for j in range(Q):
         Yi = [((1 - tab_2[j])*iy[i] + tab_2[j]*3*hmin) for i in range(Ni)]
-        curve_l = curve_length(ix, Yi)
-        #print(curve_l)
-        plt.fill_between(ix, Y2, Yi, color=str((curve_l-1)*22))
+        #curve_l = curve_length(ix, Yi)
+        curve_l = it.length(f_lam(f_lower, tab_2[j], hmin), "trapezium", 1, 0.02)
+        print(curve_l)
+        plt.fill_between(ix, Y2, Yi, color='black')
         plt.plot(ix, Yi, c=str((curve_l-1)*22))
         Y2 = Yi
 
