@@ -149,11 +149,11 @@ def pressure_map():
     Y1 = [((1 - tab[0])*ey[i] + tab[0]*3*hmax) for i in range(Ne)]
     for j in range(M):
         Ye = [((1 - tab[j])*ey[i] + tab[j]*3*hmax) for i in range(Ne)]
-        curve_l = curve_length(ex, Ye)
-        #curve_l = it.length(f_lam(f_upper, tab[j], hmax), "trapezium", 1, 0.02)
+        #curve_l = curve_length(ex, Ye)
+        curve_l = it.length(f_lam(f_upper, tab[j], hmax), "trapezium", 1, 0.01)
         #print(curve_l)
-        plt.fill_between(ex, Y1, Ye, color='black')
-        plt.plot(ex, Ye, c=str((curve_l-1)*22))
+        plt.fill_between(ex, Y1, Ye, color=str((curve_l-1)*10))
+        plt.plot(ex, Ye, c=str((curve_l-1)*10))
         Y1 = Ye
 
     #Q = int(input("How many lower airflow curves do you wish to plot ?\t"))
@@ -164,11 +164,11 @@ def pressure_map():
     Y2 = [((1 - tab_2[0])*iy[i] + tab_2[0]*3*hmin) for i in range(Ni)]
     for j in range(Q):
         Yi = [((1 - tab_2[j])*iy[i] + tab_2[j]*3*hmin) for i in range(Ni)]
-        curve_l = curve_length(ix, Yi)
-        #curve_l = it.length(f_lam(f_lower, tab_2[j], hmin), "trapezium", 1, 0.02)
+        #curve_l = curve_length(ix, Yi)
+        curve_l = it.length(f_lam(f_lower, tab_2[j], hmin), "trapezium", 1, 0.01)
         #print(curve_l)
-        plt.fill_between(ix, Y2, Yi, color='black')
-        plt.plot(ix, Yi, c=str((curve_l-1)*22))
+        plt.fill_between(ix, Y2, Yi, color=str((curve_l-1)*10))
+        plt.plot(ix, Yi, c=str((curve_l-1)*10))
         Y2 = Yi
 
     plt.plot(ex, ey, c="black", label="extrados")
@@ -199,9 +199,10 @@ def pressure_map():
     Y1 = [((1 - tab[0])*ey[i] + tab[0]*3*hmax) for i in range(Ne)]
     for j in range(M):
         Ye = [((1 - tab[j])*ey[i] + tab[j]*3*hmax) for i in range(Ne)]
-        curve_l = curve_length(ex, Ye)
+        #curve_l = curve_length(ex, Ye)
+        curve_l = it.length(f_lam(f_upper, tab[j], hmax), "trapezium", 1, 0.01)
         #print(curve_l)
-        n = int((curve_l - 1)*242)
+        n = int((curve_l - 1)*110)
         colour = '#' + str(n) + str(n) + '0000'
         plt.fill_between(ex, Y1, Ye, color=colour)
         plt.plot(ex, Ye, c=colour)
@@ -215,9 +216,10 @@ def pressure_map():
     Y2 = [((1 - tab_2[0])*iy[i] + tab_2[0]*3*hmin) for i in range(Ni)]
     for j in range(Q):
         Yi = [((1 - tab_2[j])*iy[i] + tab_2[j]*3*hmin) for i in range(Ni)]
-        curve_l = curve_length(ix, Yi)
+        #curve_l = curve_length(ix, Yi)
+        curve_l = it.length(f_lam(f_lower, tab_2[j], hmin), "trapezium", 1, 0.01)
         #print(curve_l)
-        n = int((curve_l - 1)*242)
+        n = int((curve_l - 1)*110)
         colour = '#' + str(n) + str(n) + '0000'
         plt.fill_between(ix, Y2, Yi, color=colour)
         plt.plot(ix, Yi, c=colour)
